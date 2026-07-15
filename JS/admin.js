@@ -3,7 +3,7 @@
    Admin Panel
 ========================================== */
 
-const ADMIN_PASSWORD = "Hridhaan123"; // CHANGE THIS
+const ADMIN_PASSWORD = "Tuff@6769"; // CHANGE THIS
 let currentReturnBook = null;
 let previousRequestCount = 0;
 let books = [];
