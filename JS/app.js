@@ -239,6 +239,23 @@ async function submitRequest() {
         alert("Please fill all fields");
         return;
     }
+    // Prevent borrowing the same book twice
+    if (selectedBook.status === "Borrowed") {
+        alert("❌ This book has already been borrowed.");
+        return;
+    }
+    onst alreadyBorrowed = books.find(book =>
+        book.status === "Borrowed" &&
+        (
+            book.borrower.toLowerCase() === name.toLowerCase() ||
+            String(book.phone) === phone
+        )
+    );
+
+    if (alreadyBorrowed) {
+        alert("❌ You already have a borrowed book. Please return it before borrowing another.");
+        return;
+    }
 
     try {
 
