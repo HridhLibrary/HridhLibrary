@@ -327,7 +327,19 @@ async function markAsAvailable(bookId) {
     openReturnModal(book);
 
 }
-setInterval(loadBooks,60000); // Refresh books every 60 secondsS
+async function refreshDashboard() {
+
+    await loadBooks();
+
+    // Only if the requests table still exists
+    if(document.getElementById("requestsTable")){
+        await loadRequests();
+    }
+
+}
+
+setInterval(refreshDashboard, 30000);
+
 async function returnedNormally() {
 
     currentReturnBook.status = "Available";
