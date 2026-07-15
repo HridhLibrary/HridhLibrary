@@ -251,7 +251,7 @@ async function submitRequest() {
         alert("❌ This book has already been borrowed.");
         return;
     }
-    onst alreadyBorrowed = books.find(book =>
+    const alreadyBorrowed = books.find(book =>
         book.status === "Borrowed" &&
         (
             book.borrower.toLowerCase() === name.toLowerCase() ||
