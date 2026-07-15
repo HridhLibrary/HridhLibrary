@@ -239,6 +239,13 @@ async function submitRequest() {
         alert("Please fill all fields");
         return;
     }
+    // Maximum 4 borrowed books allowed in the library
+    const borrowedCount = books.filter(book => book.status === "Borrowed").length;
+
+    if (borrowedCount >= 4) {
+        alert("🚫 The library has reached its borrowing limit (4 books). Please wait until a book is returned.");
+        return;
+    }
     // Prevent borrowing the same book twice
     if (selectedBook.status === "Borrowed") {
         alert("❌ This book has already been borrowed.");
