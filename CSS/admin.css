@@ -1,0 +1,890 @@
+/* ==========================================
+   HRIDHAAN PUBLIC LIBRARY
+   ADMIN PANEL
+========================================== */
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+:root{
+
+    --bg:#121212;
+    --card:#1E1E1E;
+    --card2:#2B2B2B;
+    --gold:#E6C35C;
+    --text:#F5F5F5;
+    --muted:#BFBFBF;
+    --green:#41D97A;
+    --red:#FF6464;
+    --blue:#4FA3FF;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+}
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    background:#121212;
+
+    z-index:-1;
+
+}
+
+/* LOGIN */
+
+#loginScreen{
+
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.login-card{
+
+    width:420px;
+
+    background:var(--card);
+
+    border-radius:22px;
+
+    padding:45px;
+
+    text-align:center;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.45);
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.login-card h1{
+
+    font-family:'Cinzel',serif;
+
+    color:var(--gold);
+
+    margin-bottom:15px;
+
+}
+
+.login-card p{
+
+    color:var(--muted);
+
+}
+
+.login-card input{
+
+    width:100%;
+
+    padding:16px;
+
+    margin:30px 0 20px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+}
+
+.login-card button{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--gold);
+
+    color:#111;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.login-card button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+#loginError{
+
+    color:var(--red);
+
+    margin-top:20px;
+
+}
+
+/* HEADER */
+
+header{
+
+    text-align:center;
+
+    padding:50px 20px;
+
+}
+
+header h1{
+
+    font-family:'Cinzel',serif;
+
+    color:var(--gold);
+
+    font-size:3rem;
+
+}
+
+header p{
+
+    color:var(--muted);
+
+    margin-top:10px;
+
+}
+
+/* STATS */
+
+.stats{
+
+    width:90%;
+
+    max-width:1400px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:25px;
+
+    margin-bottom:40px;
+
+}
+
+.stat-card{
+
+    background:var(--card);
+
+    padding:35px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    border:1px solid rgba(255,255,255,.05);
+
+    transition:.3s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.stat-card h2{
+
+    font-size:3rem;
+
+    color:var(--gold);
+
+}
+
+.stat-card p{
+
+    margin-top:12px;
+
+    color:var(--muted);
+
+}
+
+/* TOOLBAR */
+
+.toolbar{
+
+    width:90%;
+
+    max-width:1400px;
+
+    margin:0 auto 35px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    align-items:center;
+
+}
+
+#searchBooks{
+
+    flex:1;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+}
+
+#addBookBtn{
+
+    padding:16px 28px;
+
+    background:var(--gold);
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+#addBookBtn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/* TABLE */
+
+.table-section{
+
+    width:90%;
+
+    max-width:1400px;
+
+    margin:auto;
+
+    margin-bottom:50px;
+
+    overflow-x:auto;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:var(--card);
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+}
+
+thead{
+
+    background:#272727;
+
+}
+
+th{
+
+    padding:18px;
+
+    text-align:left;
+
+    color:var(--gold);
+
+}
+
+td{
+
+    padding:18px;
+
+    border-top:1px solid rgba(255,255,255,.05);
+
+}
+
+tbody tr{
+
+    transition:.25s;
+
+}
+
+tbody tr:hover{
+
+    background:#292929;
+
+}
+
+td img{
+
+    width:55px;
+
+    border-radius:8px;
+
+}
+/* ==========================================
+   PANELS
+========================================== */
+
+.panel{
+
+    width:90%;
+
+    max-width:1400px;
+
+    margin:40px auto;
+
+    background:var(--card);
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,.05);
+
+}
+
+.panel-header{
+
+    padding:22px 28px;
+
+    background:#252525;
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+
+}
+
+.panel-header h2{
+
+    color:var(--gold);
+
+    font-family:'Cinzel',serif;
+
+}
+
+/* ==========================================
+   MODALS
+========================================== */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.75);
+
+    backdrop-filter:blur(10px);
+
+    z-index:999;
+
+}
+
+.hidden{
+
+    display:none;
+
+}
+
+.modal-content{
+
+    width:90%;
+
+    max-width:650px;
+
+    background:var(--card);
+
+    border-radius:22px;
+
+    padding:35px;
+
+    position:relative;
+
+    animation:popup .3s ease;
+
+}
+
+.close{
+
+    position:absolute;
+
+    right:25px;
+
+    top:18px;
+
+    font-size:32px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.close:hover{
+
+    color:var(--gold);
+
+    transform:rotate(90deg);
+
+}
+
+/* ==========================================
+   FORM
+========================================== */
+
+.modal-content h2{
+
+    color:var(--gold);
+
+    margin-bottom:25px;
+
+    font-family:'Cinzel',serif;
+
+}
+
+.modal-content input,
+
+.modal-content textarea{
+
+    width:100%;
+
+    margin-bottom:18px;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:var(--card2);
+
+    color:white;
+
+    font-size:15px;
+
+    resize:vertical;
+
+}
+
+.modal-content textarea{
+
+    min-height:140px;
+
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.save-btn,
+
+.delete-btn,
+
+.cancel-btn,
+
+.edit-btn,
+
+.remove-btn,
+
+.approve-btn,
+
+.reject-btn,
+
+.return-btn{
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.save-btn{
+
+    width:100%;
+
+    background:var(--gold);
+
+    color:#111;
+
+}
+
+.edit-btn{
+
+    background:var(--blue);
+
+    color:white;
+
+}
+
+.remove-btn,
+
+.delete-btn{
+
+    background:var(--red);
+
+    color:white;
+
+}
+
+.approve-btn{
+
+    background-color: #41D97A;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-right: 5px;
+    transition: 0.2s;
+}
+
+.approve-btn:hover{
+
+    background-color: #2d9f5a;
+    transform: scale(1.05);
+}
+
+.reject-btn{
+
+    background-color: #FF6464;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.reject-btn:hover{
+
+    background-color: #e53e3e;
+    transform: scale(1.05);
+}
+
+.return-btn{
+
+    background-color: #E6C35C;
+    color: #111;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.return-btn:hover{
+
+    background-color: #f0e68c;
+    transform: scale(1.05);
+}
+
+.save-btn:hover,
+
+.edit-btn:hover,
+
+.remove-btn:hover,
+
+.delete-btn:hover,
+
+.approve-btn:hover,
+
+.reject-btn:hover,
+
+.return-btn:hover,
+
+.cancel-btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.modal-buttons{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+    margin-top:25px;
+
+}
+
+/* ==========================================
+   STATUS BADGES
+========================================== */
+
+.available,
+
+.borrowed{
+
+    display:inline-block;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:.85rem;
+
+    font-weight:600;
+
+}
+
+.available{
+
+    background:rgba(65,217,122,.15);
+
+    color:var(--green);
+
+}
+
+.borrowed{
+
+    background:rgba(255,100,100,.15);
+
+    color:var(--red);
+
+}
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#1b1b1b;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--gold);
+
+    border-radius:999px;
+
+}
+
+/* ==========================================
+   ANIMATIONS
+========================================== */
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.92);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+table,
+
+.panel,
+
+.stat-card{
+
+    animation:fade .5s ease;
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:900px){
+
+    .toolbar{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    #addBookBtn{
+
+        width:100%;
+
+    }
+
+    header h1{
+
+        font-size:2.3rem;
+
+    }
+
+}
+
+@media(max-width:700px){
+
+    .stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+    table{
+
+        font-size:14px;
+
+    }
+
+    th,
+
+    td{
+
+        padding:12px;
+
+    }
+
+    .modal-content{
+
+        padding:25px;
+
+    }
+
+}
+
+.admin-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background: linear-gradient(135deg, #1A2330, #222E40);
+    border-bottom: 2px solid #E6C35C;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.admin-navbar h1 {
+    color: #E6C35C;
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    margin: 0;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #E6C35C;
+    color: #111;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    background-color: #f0e68c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(230, 195, 92, 0.3);
+}

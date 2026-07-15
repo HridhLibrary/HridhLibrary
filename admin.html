@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Hridhlibrary | Admin</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="css/admin.css">
+
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<!-- ==========================
+LOGIN SCREEN
+========================== -->
+
+<div id="loginScreen">
+
+    <div class="login-card">
+
+        <h1>
+
+            📚 Hridhlibrary
+
+        </h1>
+
+        <p>
+
+            Librarian Login
+
+        </p>
+
+        <input
+
+            id="password"
+
+            type="password"
+
+            placeholder="Enter Password"
+
+        >
+
+        <button onclick="login()">
+
+            Enter Dashboard
+
+        </button>
+
+        <p id="loginError"></p>
+
+    </div>
+
+</div>
+
+<!-- ==========================
+ADMIN DASHBOARD
+========================== -->
+
+<div id="dashboard"
+
+     style="display:none;">
+
+<header>
+
+    <h1>
+
+        📚 Hridhlibrary
+
+    </h1>
+
+    <p>
+
+        Librarian Dashboard
+
+    </p>
+
+</header>
+
+<!-- ==========================
+STATISTICS
+========================== -->
+
+<section class="stats">
+
+    <div class="stat-card">
+
+        <h2 id="bookCount">
+
+            0
+
+        </h2>
+
+        <p>
+
+            Total Books
+
+        </p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h2 id="availableCount">
+
+            0
+
+        </h2>
+
+        <p>
+
+            Available
+
+        </p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h2 id="borrowedCount">
+
+            0
+
+        </h2>
+
+        <p>
+
+            Borrowed
+
+        </p>
+
+    
+
+    
+
+        
+
+</section>
+
+<!-- ==========================
+TOOLBAR
+========================== -->
+
+<section class="toolbar">
+
+    <input
+
+        id="searchBooks"
+
+        placeholder="🔍 Search books..."
+
+    >
+
+    <button
+
+        id="addBookBtn"
+
+        onclick="openAddModal()"
+
+    >
+
+        ➕ Add Book
+
+    </button>
+    
+
+</section>
+
+<!-- ==========================
+BOOK TABLE
+========================== -->
+
+<section class="table-section">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+
+                    Cover
+
+                </th>
+
+                <th>
+
+                    Title
+
+                </th>
+
+                <th>
+
+                    Author
+
+                </th>
+
+                <th>
+
+                    Genre
+
+                </th>
+
+                <th>
+
+                    Status
+
+                </th>
+
+                <th>
+
+                    Actions
+
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="bookTable">
+
+        </tbody>
+
+    </table>
+
+</section>
+<!-- ==========================
+PENDING REQUESTS
+========================== -->
+
+
+<!-- ==========================
+BORROWED BOOKS
+========================== -->
+
+<section class="panel">
+
+    <div class="panel-header">
+
+        <h2>
+
+            📚 Borrowed Books
+
+        </h2>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Book</th>
+
+                <th>Borrower</th>
+
+                <th>Due Date</th>
+
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="borrowedTable">
+
+        </tbody>
+
+    </table>
+
+</section>
+
+<!-- ==========================
+ADD / EDIT BOOK MODAL
+========================== -->
+
+<div
+class="modal hidden"
+id="bookModal">
+
+    <div class="modal-content">
+
+        <span
+        class="close"
+        id="closeModal">&times;</span>
+
+        <h2 id="modalTitle">Add New Book</h2>
+        
+        <input type="text" id="bookTitle" placeholder="Title" required>
+        <input type="text" id="bookAuthor" placeholder="Author" required>
+        <input type="text" id="bookGenre" placeholder="Genre" required>
+        <input type="text" id="bookSeries" placeholder="Series">
+        <input type="text" id="bookVolume" placeholder="Volume">
+        <input type="text" id="bookCover" placeholder="Cover Image URL">
+        <textarea id="bookSummary" placeholder="Summary"></textarea>
+        
+        <select id="bookStatus">
+            <option value="Available">Available</option>
+            <option value="Borrowed">Borrowed</option>
+        </select>
+
+        <div class="modal-buttons">
+            <button class="save-btn" onclick="saveBook()">Save Book</button>
+            <button class="cancel-btn" onclick="closeBookModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE MODAL -->
+<div class="modal hidden" id="deleteModal">
+    <div class="modal-content">
+        <span class="close" id="closeDeleteModal">&times;</span>
+        <h2>Delete Book?</h2>
+        <p>Are you sure you want to delete this book?</p>
+        <div class="modal-buttons">
+            <button class="delete-btn" id="confirmDelete">Delete</button>
+            <button class="cancel-btn" onclick="closeDeleteModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script src="js/api.js"></script>
+
+<script src="js/admin.js"></script>
+
+
+
+<div id="returnModal" class="modal hidden">
+
+    <div class="modal-content">
+
+        <h2>Return Confirmation</h2>
+
+        <p id="returnBook"></p>
+
+        <div class="modal-buttons">
+
+            <button
+                class="save-btn"
+                onclick="returnedNormally()">
+
+                ✅ Returned Normally
+
+            </button>
+
+            <button
+                class="delete-btn"
+                onclick="borrowCancelled()">
+
+                ❌ Borrow Cancelled
+
+            </button>
+
+            <button
+                class="cancel-btn"
+                onclick="closeReturnModal()">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+</body>
+
+</html>
